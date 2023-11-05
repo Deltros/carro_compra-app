@@ -1,17 +1,35 @@
+import PropTypes from 'prop-types';
 
-export const ProductoView = ({ nombre,descripcion,precioUnitario }) => {
+export const ProductoView = ({ handler, id, nombre, descripcion, precioUnitario }) => {
+
+    const onAddProducto = (producto) => {
+        handler(producto);
+    }
+
     return (
         <>
-            <div className="col-3 my-2" >
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">{nombre}</h5>
-                        <p className="card-text">{descripcion}</p>
-                        <p className="card-text">${precioUnitario}</p>
-                        <button className="btn btn-primary">Agregar</button>
+            <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title text-center">{nombre}</h5>
+                    <p className="card-text">{descripcion}</p>
+                    <p className="card-text text-end">${precioUnitario}</p>
+                    <div className="d-grid gap-2">
+                    <button className="btn btn-primary"
+                        onClick={() => onAddProducto({ id, nombre, descripcion, precioUnitario })}>
+                            Agregar al carro
+                    </button>
                     </div>
+
                 </div>
             </div>
         </>
     )
+}
+
+ProductoView.propTypes = {
+    handler: PropTypes.func,
+    id: PropTypes.number.isRequired,
+    nombre: PropTypes.string.isRequired,
+    descripcion: PropTypes.string.isRequired,
+    precioUnitario: PropTypes.number.isRequired
 }
