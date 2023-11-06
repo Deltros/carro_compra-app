@@ -14,7 +14,7 @@ export const CarroCompraView = ({ handler, items }) => {
         handler(id);
     }
 
-    const parseNumeroToDinero = (numero) => {
+    const parseDinero = (numero) => {
         return numero.toLocaleString().replace(/,/g, '.');
     }
 
@@ -36,9 +36,9 @@ export const CarroCompraView = ({ handler, items }) => {
                     {items.map( item  => 
                         <tr key={item.producto.id}>
                             <td>{item.producto.nombre}</td>
-                            <td>${parseNumeroToDinero(item.producto.precioUnitario)}</td>
+                            <td>${parseDinero(item.producto.precioUnitario)}</td>
                             <td>{item.cantidad}</td>
-                            <td>${parseNumeroToDinero(item.cantidad * item.producto.precioUnitario)}</td>
+                            <td>${parseDinero(item.cantidad * item.producto.precioUnitario)}</td>
                             <td>
                                 <button 
                                     className="btn btn-danger"
@@ -53,7 +53,7 @@ export const CarroCompraView = ({ handler, items }) => {
                 <tfoot>
                     <tr>
                         <td colSpan="3" className="text-end fw-bold">Total</td>
-                        <td colSpan="2" className="text-start fw-bold">${parseNumeroToDinero(total)}</td>
+                        <td colSpan="2" className="text-start fw-bold">${parseDinero(total)}</td>
                     </tr>
                 </tfoot>
             </table>

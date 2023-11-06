@@ -2,9 +2,11 @@ import { ProductosView } from "./components/ProductosView";
 import { CarroCompraView } from "./components/CarroCompraView";
 import { useState } from "react";
 
+const productosCarroInicial = JSON.parse(sessionStorage.getItem('carro')) || [];
+
 export const CarroApp = () => {
 
-    const [ productosCarro, setProductosCarro ] = useState([]);
+    const [ productosCarro, setProductosCarro ] = useState(productosCarroInicial);
 
     const handlerAddProductoCarro = (producto) => {
         
@@ -35,6 +37,7 @@ export const CarroApp = () => {
         }
 
         setProductosCarro(newProductosCarro);
+        sessionStorage.setItem( 'carro', JSON.stringify(newProductosCarro) );
     }
 
     const handlerDeleteProductoCarro = (id) => {
@@ -42,6 +45,7 @@ export const CarroApp = () => {
         let newProductosCarro = productosCarro.filter((p) => {return p.producto.id !== id});
 
         setProductosCarro(newProductosCarro);
+        sessionStorage.setItem( 'carro', JSON.stringify(newProductosCarro) );
     }
 
     return (
