@@ -1,26 +1,22 @@
-import { ProductosView } from "./components/ProductosView";
-import { CarroCompraView } from "./components/CarroCompraView";
+import { Navbar } from "./components/Navbar";
 import { useProductosCarro } from "./hooks/useProductosCarro";
+import { CarroRoutes } from "./routes/CarroRoutes";
 
 export const CarroApp = () => {
 
     const { productosCarro, handlerAddProductoCarro, handlerDeleteProductoCarro } = useProductosCarro();
+
+    
     return (
         <>
-            <div className="container">
-                <h1>Carro</h1>
-
-                <ProductosView handler={producto => handlerAddProductoCarro(producto)} />
-
-                { productosCarro?.length <= 0 || (
-                    <div className="my-4 w-50">
-                        <CarroCompraView 
-                            items={productosCarro} 
-                            handler={id => handlerDeleteProductoCarro(id)}
-                        />
-                    </div>
-                )}
-
+            <Navbar />
+            <div className="container my-4">
+                <h3>Carro</h3>
+                <CarroRoutes 
+                    productosCarro={productosCarro}
+                    handlerAddProductoCarro={handlerAddProductoCarro}
+                    handlerDeleteProductoCarro={handlerDeleteProductoCarro}
+                />
             </div>
         </>
     );

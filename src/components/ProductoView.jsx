@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductoView = ({ handler, id, nombre, descripcion, precioUnitario }) => {
 
+    const navigate = useNavigate();
+
     const onAddProducto = (producto) => {
         handler(producto);
+        navigate('/carro')
     }
 
     return (
